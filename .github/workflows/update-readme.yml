@@ -2,12 +2,14 @@ name: Update README with Repo List
 
 on:
   schedule:
-    - cron: "0 0 * * 1"   # Runs every Monday at midnight
-  workflow_dispatch:     # Allows manual trigger from GitHub UI
+    - cron: "0 0 * * 1"   # Runs every Monday
+  workflow_dispatch:     # Manual run from Actions tab
 
 jobs:
   update-readme:
     runs-on: ubuntu-latest
+    permissions:
+      contents: write   # 👈 this gives permission to push changes
     steps:
       - name: Checkout Repo
         uses: actions/checkout@v3
