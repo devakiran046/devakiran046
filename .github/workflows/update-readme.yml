@@ -2,8 +2,8 @@ name: Update README with Repo List
 
 on:
   schedule:
-    - cron: "0 0 * * 1"   # runs every Monday at midnight
-  workflow_dispatch:       # allows manual run
+    - cron: "0 0 * * 1"   # Runs every Monday at midnight
+  workflow_dispatch:     # Allows manual trigger from GitHub UI
 
 jobs:
   update-readme:
@@ -12,19 +12,19 @@ jobs:
       - name: Checkout Repo
         uses: actions/checkout@v3
 
-      - name: Update README
-        uses: actions/github-script@v6
+      - name: Generate Repo List
+        uses: actions/github-script@v7
         with:
           github-token: ${{ secrets.GITHUB_TOKEN }}
           script: |
             const fs = require('fs');
-            const { data: repos } = await github.repos.listForUser({
+            const repos = await github.rest.repos.listForUser({
               username: 'devakiran046',
               sort: 'updated',
               direction: 'desc',
               per_page: 100
             });
-            const repoList = repos.map(r => `- [${r.name}](${r.html_url})`).join('\n');
+            const repoList = repos.data.map(r => `- [${r.name}](${r.html_url})`).join('\n');
             const content = `# Hi, I'm Deva 👋\n\n## My Projects\n${repoList}`;
             fs.writeFileSync('README.md', content);
 
@@ -33,5 +33,5 @@ jobs:
           git config --global user.name "github-actions"
           git config --global user.email "github-actions@github.com"
           git add README.md
-          git commit -m "Update README with latest repos"
+          git commit -m "Auto-update README with latest repos" || echo "No changes to commit"
           git push
