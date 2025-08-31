@@ -9,7 +9,7 @@ jobs:
   update-readme:
     runs-on: ubuntu-latest
     permissions:
-      contents: write   # 👈 this gives permission to push changes
+      contents: write
     steps:
       - name: Checkout Repo
         uses: actions/checkout@v3
@@ -20,15 +20,32 @@ jobs:
           github-token: ${{ secrets.GITHUB_TOKEN }}
           script: |
             const fs = require('fs');
+
+            // Get your repositories
             const repos = await github.rest.repos.listForUser({
               username: 'devakiran046',
               sort: 'updated',
               direction: 'desc',
               per_page: 100
             });
+
+            // Build markdown repo list
             const repoList = repos.data.map(r => `- [${r.name}](${r.html_url})`).join('\n');
-            const content = `# Hi, I'm Deva 👋\n\n## My Projects\n${repoList}`;
-            fs.writeFileSync('README.md', content);
+
+            // Read current README
+            let readme = fs.readFileSync('README.md', 'utf8');
+
+            // Look for marker, or append new section
+            const marker = "<!-- PROJECTS-LIST -->";
+            if (readme.includes(marker)) {
+              // Replace everything after marker with new project list
+              readme = readme.split(marker)[0] + marker + `\n\n## My Projects\n${repoList}`;
+            } else {
+              // If marker not found, just append at end
+              readme += `\n\n${marker}\n\n## My Projects\n${repoList}`;
+            }
+
+            fs.writeFileSync('README.md', readme);
 
       - name: Commit and Push
         run: |
