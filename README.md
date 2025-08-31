@@ -98,3 +98,11 @@ I’m open to collaborating on data-driven projects, especially those integratin
 ⭐ Feel free to explore my repositories and leave a star if you find something helpful! ⭐
 
 --- 
+
+
+<!-- PROJECTS-LIST -->
+
+## My Projects
+- [devakiran046](https://github.com/devakiran046/devakiran046)
+- [Python-BI-dashboard-](https://github.com/devakiran046/Python-BI-dashboard-)
+- [World-Seasons-Analysis-Dashboard-in-Power-BI](https://github.com/devakiran046/World-Seasons-Analysis-Dashboard-in-Power-BI)
