@@ -22,7 +22,7 @@ I don't just write queries. I build the pipelines, dashboards, and models that o
   Step 4: Delete this comment block and the placeholder below
 -->
 
-![Hantavirus Dashboard Preview](assets/hantavirus-dashboard.png)
+![Hantavirus Dashboard Preview](Dashboard.png)
 
 6 production-ready analytical insights built on a multi-table public health dataset in SQL Server Management Studio, visualized in Tableau.
 
@@ -82,7 +82,7 @@ End-to-end machine learning classification pipeline built in Python to predict c
   Step 4: Delete this comment block and the placeholder below
 -->
 
-![Christmas Retail Dashboard Preview](assets/christmas-retail-dashboard.png)
+![Christmas Retail Dashboard Preview](Products.png)
 
 Retail sales analysis focused on Christmas season performance — revenue trends, product category breakdown, customer purchasing behavior, and seasonal KPI tracking.
 
